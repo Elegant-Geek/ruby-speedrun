@@ -58,6 +58,8 @@ player2 = Player.new("curly", 125)
 # moe takes default health value
 player3 = Player.new("moe")
 player4 = Player.new("shemp", 90)
+player5 = Player.new("harry", 105)
+
 
 #test code to run
 puts player4
@@ -71,3 +73,24 @@ puts player4.health
 player4.name = "sheeeemp"
 puts player4.name
 
+players = [player1, player2, player3, player4]
+puts "There are #{players.length} players in the game:"
+players.each do |p|
+    puts p
+end
+players.each do |p|
+    puts p.health
+end
+players.each do |p|
+    p.blam
+    p.woot
+    p.woot
+end
+# add a player (harry)
+players.insert(2, player5)
+# remove a player (moe)
+players.slice!(3)
+# display each player name
+players.each do |p|
+    puts p
+end
