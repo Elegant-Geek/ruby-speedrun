@@ -19,27 +19,38 @@ call_game
 
 
 class Player
+# allows you to READ and WRITE TO (change) the object values of name and health from the outside / top level.
+# NOTE: these variables are grabbed directly from the names of the instance variables
+    attr_accessor :name, :health
+
     def initialize(name, health=100)
         @name = name.capitalize
         @health = health
         puts "New player #{@name} with health of #{@health} created."
     end
+# if you rename a player without the name capitalized, it will not auto-update unless this method is specified inside this class.
+    def name=(new_name)
+        @name = new_name.capitalize
+      end
 
     def woot()
         @health += 15
         puts "Player #{@name} got wooted!"
-        #self.say_hello
     end
     
     def blam()
         @health -= 10
         puts "Player #{@name} got blammed!"
-        #self.say_hello
+    end
+
+    def score 
+        @health + @name.length
     end
 
     def to_s
-        "I'm #{@name} with a health of #{@health}."
+        "I'm #{@name} with a health of #{@health} and a score of #{score}."
     end
+
 end
 # creating new players
 player1 = Player.new("larry", 60)
@@ -53,4 +64,10 @@ puts player4
 player4.woot
 player4.blam
 puts player4
+# testing that you can read an objects internal state from the outside now:
+puts player4.name
+puts player4.health
+# new name gets capitalized from the "name" method defined inside the Player class to overwrite default "name=" method
+player4.name = "sheeeemp"
+puts player4.name
 
