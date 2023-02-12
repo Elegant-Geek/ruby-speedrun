@@ -15,14 +15,39 @@ end
 def call_game
     puts "The game has started on #{format_time}"
 end
-call_game
+
+class Game
+    attr_reader :title
+    def initialize(title)
+        @title = title
+        @players = []
+    end
+    def add_player(p)
+        @players.push(p)
+    end
+    def play
+        #calling a global variable (string in this case)
+        call_game
+        puts "There are #{@players.length} players in #{@title}:"
+        @players.each do |p|
+            puts p
+        end
+        @players.each do |p|
+            p.blam
+            p.woot
+            p.woot
+            puts p
+        end
 
 
+
+
+    end
+end
 class Player
 # allows you to READ and WRITE TO (change) the object values of name and health from the outside / top level.
 # NOTE: these variables are grabbed directly from the names of the instance variables
     attr_accessor :name, :health
-
     def initialize(name, health=100)
         @name = name.capitalize
         @health = health
@@ -58,11 +83,27 @@ player2 = Player.new("curly", 125)
 # moe takes default health value
 player3 = Player.new("moe")
 player4 = Player.new("shemp", 90)
-player5 = Player.new("harry", 105)
 
-players = [player1, player2, player3, player4]
+# create new game 
+knuckleheads = Game.new("Knuckleheads")
+# add spme players to game
+knuckleheads.add_player(player1)
+knuckleheads.add_player(player2)
+knuckleheads.add_player(player3)
+knuckleheads.add_player(player4)
+# run the game
+knuckleheads.play
 
-puts "There are #{players.length} players in the game:"
-players.each do |p|
-    puts p
-end
+# creating new players
+player5 = Player.new("alvin", 60)
+player6 = Player.new("simon", 70)
+player7 = Player.new("theodore", 80)
+
+# create new game 
+chipmunks = Game.new("Chipmunks")
+# add spme players to game
+chipmunks.add_player(player5)
+chipmunks.add_player(player6)
+chipmunks.add_player(player7)
+# run the game
+chipmunks.play
