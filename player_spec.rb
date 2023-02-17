@@ -12,6 +12,7 @@ describe Player do
 # code here
 before do
     @player = Player.new("larry", 150)
+    @initial_health = @player.health
 end
 
 it "has a capitalized name" do
@@ -19,7 +20,8 @@ it "has a capitalized name" do
 end
 
 it "has a initial health of 150" do
-    @player.health.should == 150
+    # @player.health.should == 150
+    @initial_health.should == 150
 end
 
 it "has a string representation" do
