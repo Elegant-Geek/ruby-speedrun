@@ -7,6 +7,11 @@ class Player
             @health = health
             puts "New player #{@name} with health of #{@health} created."
         end
+
+        def strong?
+            @health > 100
+        end
+
     # if you rename a player without the name capitalized, it will not auto-update unless this method is specified inside this class.
         def name=(new_name)
             @name = new_name.capitalize

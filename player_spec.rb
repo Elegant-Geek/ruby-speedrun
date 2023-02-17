@@ -34,12 +34,36 @@ end
 
 it "increases health by 15 when w00ted" do
     @player.woot
-    @player.health.should == 165
+    @player.health.should == @initial_health + 15
 end
 
 it "decreases health by 10 when blammed" do
     @player.blam
-    @player.health.should == 140
+    @player.health.should == @initial_health - 10
+end
+
+
+context "strong player" do
+    before do
+        @player = Player.new("larry", 150)
+        @initial_health = @player.health
+    end
+    it "is a strong player" do
+        @player.should be_strong
+    end
+end
+
+context "wimpy player" do
+    before do
+        @player = Player.new("larry", 100)
+        @initial_health = @player.health
+    end
+    it "is a wimpy player" do
+        @player.should_not be_strong
+    end
 end
 
 end
+
+
+
