@@ -1,4 +1,5 @@
 require_relative 'player'
+require_relative 'spec_helper'
 
 # has a capitalized name
 # has an initial health
