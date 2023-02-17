@@ -1,4 +1,6 @@
 require_relative 'player'
+require_relative 'die'
+
 class Game
     attr_reader :title
     def initialize(title)
@@ -9,6 +11,7 @@ class Game
         @players.push(p)
     end
     def play
+
         # an example of using the last returned value from one function (format time) as input to another function
         puts "The game has started on #{Time.now.strftime("%A %-m/%d/%Y at %-I:%M%p")}."
         puts "There are #{@players.length} players in #{@title}:"
@@ -16,9 +19,18 @@ class Game
             puts p
         end
         @players.each do |p|
-            p.blam
-            p.woot
-            p.woot
+            die = Die.new
+            number_rolled = die.roll
+            if number_rolled < 3
+                p.blam
+              elsif number_rolled < 5
+                puts "#{p.name} was skipped."
+              else
+                p.woot
+              end
+            # p.blam
+            # p.woot
+            # p.woot
             puts p
         end
     end
