@@ -13,7 +13,7 @@ describe Game do
   it "w00ts the player if a high number is rolled" do
     Die.any_instance.stub(:roll).and_return(5)
   
-    @game.play
+    @game.play(1)
   
     @player.health.should == @initial_health + 15
   end
@@ -21,7 +21,7 @@ describe Game do
   it "skips the player if a medium number is rolled" do
     Die.any_instance.stub(:roll).and_return(3)
   
-    @game.play
+    @game.play(1)
   
     @player.health.should == @initial_health
   end
@@ -29,7 +29,7 @@ describe Game do
   it "blams the player if a low number is rolled" do
     Die.any_instance.stub(:roll).and_return(1)
   
-    @game.play
+    @game.play(1)
   
     @player.health.should == @initial_health - 10
   end

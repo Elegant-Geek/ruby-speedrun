@@ -23,4 +23,4 @@ knuckleheads.add_player(player3)
 knuckleheads.add_player(player4)
 # run the game
 knuckleheads.play
-
+knuckleheads.print_stats

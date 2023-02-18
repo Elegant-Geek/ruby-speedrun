@@ -1,5 +1,6 @@
 require_relative 'player'
 require_relative 'die'
+require_relative 'gameturn'
 
 class Game
     attr_reader :title
@@ -10,29 +11,41 @@ class Game
     def add_player(p)
         @players.push(p)
     end
-    def play
-
+    #setting default rounds played to one
+    def play(rounds=1)
         # an example of using the last returned value from one function (format time) as input to another function
         puts "The game has started on #{Time.now.strftime("%A %-m/%d/%Y at %-I:%M%p")}."
         puts "There are #{@players.length} players in #{@title}:"
         @players.each do |p|
             puts p
         end
-        @players.each do |p|
-            die = Die.new
-            number_rolled = die.roll
-            if number_rolled < 3
-                p.blam
-              elsif number_rolled < 5
-                puts "#{p.name} was skipped."
-              else
-                p.woot
-              end
-            # p.blam
-            # p.woot
-            # p.woot
-            puts p
+        #playing rounds 1 to whatever is specified
+        1.upto(rounds) do |round|
+            puts "\nRound #{round}:"
+            @players.each do |p|
+                GameTurn.take_turn(p)
+            end
         end
+    end
+    def print_stats
+        puts "\n#{@title} Statistics:"
+        strong_players, wimpy_players = @players.partition {|p| p.strong?}
+        puts "\n#{strong_players.size} strong players:"
+        strong_players.each do |p|
+            puts "#{p.name} (#{p.health})"
+        end
+        puts "\n#{wimpy_players.size} wimpy players:"
+        wimpy_players.each do |p|
+            puts "#{p.name} (#{p.health})"
+        end
+
+        sorted_players = @players.sort_by {|p| p.score}.reverse
+        puts "\n#{@title} High Scores:"
+        sorted_players.each do |p|
+        formatted_name = p.name.ljust(20, '.')
+        puts "#{formatted_name} #{p.score}"
+        end
+
     end
 end
 

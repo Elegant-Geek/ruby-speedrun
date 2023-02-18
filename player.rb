@@ -5,7 +5,7 @@ class Player
         def initialize(name, health=100)
             @name = name.capitalize
             @health = health
-            puts "New player #{@name} with health of #{@health} created."
+            # puts "New player #{@name} with health of #{@health} created."
         end
 
         def strong?
