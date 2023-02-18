@@ -1,6 +1,7 @@
 require_relative 'player'
 require_relative 'die'
 require_relative 'gameturn'
+require_relative 'treasure_trove'
 
 class Game
     attr_reader :title
@@ -26,6 +27,12 @@ class Game
                 GameTurn.take_turn(p)
             end
         end
+        #treasure stuff
+        treasures = TreasureTrove::TREASURES
+        treasures.each do |t|
+            puts "A #{t.name} is worth #{t.points}"
+        end
+
     end
     def print_stats
         puts "\n#{@title} Statistics:"
