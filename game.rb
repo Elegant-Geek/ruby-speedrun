@@ -24,6 +24,7 @@ class Game
         1.upto(rounds) do |round|
             puts "\nRound #{round}:"
             @players.each do |p|
+                #references gameturn.rb
                 GameTurn.take_turn(p)
             end
         end
@@ -52,7 +53,11 @@ class Game
         formatted_name = p.name.ljust(20, '.')
         puts "#{formatted_name} #{p.score}"
         end
-
+        # TIP: you can replace @players below with the sorted players if you want but it doesn't matter too much
+        @players.each do |p|
+            puts "\n#{p.name}'s point totals:"
+            puts "#{p.points} grand total points"
+        end
     end
 end
 

@@ -20,7 +20,9 @@ module GameTurn
             puts p
             
             treasure = TreasureTrove.random
-            puts "#{p.name} found a #{treasure.name} worth #{treasure.points} points."
+            # assigns the variable treasure to the players treasure/point hash using the .found_treasure method!
+            p.found_treasure(treasure)
+            # puts "#{p.name} found a #{treasure.name} worth #{treasure.points} points."
     end
     
 end

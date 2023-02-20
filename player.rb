@@ -6,10 +6,23 @@ class Player
             @name = name.capitalize
             @health = health
             # puts "New player #{@name} with health of #{@health} created."
+            #create a new hash for every player (every player has their own hash for treasure accumulation)
+            @found_treasures = Hash.new(0)
         end
 
         def strong?
             @health > 100
+        end
+
+        def found_treasure(treasure)
+            # accumulate points based on the treasure's name in the hash (@found_treasures[treasure.name] fetches the points associated with that treasures name)
+            @found_treasures[treasure.name] += treasure.points
+            puts "#{@name} found a #{treasure.name} worth #{treasure.points} points."
+            puts "#{@name}'s treasures: #{@found_treasures}"
+        end
+
+        def points
+            @found_treasures.values.reduce(0, :+)
         end
 
     # if you rename a player without the name capitalized, it will not auto-update unless this method is specified inside this class.
@@ -28,11 +41,12 @@ class Player
         end
     
         def score 
-            @health + @name.length
+            @health + points
         end
     
         def to_s
-            "I'm #{@name} with a health of #{@health} and a score of #{score}."
+            # "I'm #{@name} with a health of #{@health} and a score of #{score}."
+            "I'm #{@name} with health = #{@health}, points = #{points}, and score = #{score}."
         end
 end
 
