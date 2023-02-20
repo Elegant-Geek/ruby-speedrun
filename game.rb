@@ -56,6 +56,9 @@ class Game
         # TIP: you can replace @players below with the sorted players if you want but it doesn't matter too much
         @players.each do |p|
             puts "\n#{p.name}'s point totals:"
+            # NOTE: the value of |treasure| is being yielded (inserted) 
+            # into this block below and is being called from line 55 of player.rb (yield Treasure.new(name, points)
+            # so every Treasure.new gets passed in as |treasure|
             p.each_found_treasure do |treasure|
                 puts "#{treasure.points} total #{treasure.name} points"
         end
