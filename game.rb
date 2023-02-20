@@ -56,7 +56,10 @@ class Game
         # TIP: you can replace @players below with the sorted players if you want but it doesn't matter too much
         @players.each do |p|
             puts "\n#{p.name}'s point totals:"
-            puts "#{p.points} grand total points"
+            p.each_found_treasure do |treasure|
+                puts "#{treasure.points} total #{treasure.name} points"
+        end
+        puts "#{p.points} grand total points"
         end
     end
 end

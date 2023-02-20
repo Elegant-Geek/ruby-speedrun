@@ -1,3 +1,4 @@
+require_relative 'treasure_trove'
 class Player
     # allows you to READ and WRITE TO (change) the object values of name and health from the outside / top level.
     # NOTE: these variables are grabbed directly from the names of the instance variables
@@ -47,6 +48,12 @@ class Player
         def to_s
             # "I'm #{@name} with a health of #{@health} and a score of #{score}."
             "I'm #{@name} with health = #{@health}, points = #{points}, and score = #{score}."
+        end
+
+        def each_found_treasure
+            @found_treasures.each do |name, points|
+                yield Treasure.new(name, points)
+            end
         end
 end
 
