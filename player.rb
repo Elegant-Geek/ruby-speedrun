@@ -1,5 +1,8 @@
 require_relative 'treasure_trove'
+require_relative 'playable'
+
 class Player
+    include Playable 
     # allows you to READ and WRITE TO (change) the object values of name and health from the outside / top level.
     # NOTE: these variables are grabbed directly from the names of the instance variables
         attr_accessor :name, :health
@@ -18,10 +21,6 @@ class Player
             player = Player.new(name, Integer(health))
           end
 
-        def strong?
-            @health > 100
-        end
-
         def found_treasure(treasure)
             # accumulate points based on the treasure's name in the hash (@found_treasures[treasure.name] fetches the points associated with that treasures name)
             @found_treasures[treasure.name] += treasure.points
@@ -37,16 +36,6 @@ class Player
         def name=(new_name)
             @name = new_name.capitalize
           end
-    
-        def woot()
-            @health += 15
-            puts "Player #{@name} got wooted!"
-        end
-        
-        def blam()
-            @health -= 10
-            puts "Player #{@name} got blammed!"
-        end
     
         def score 
             @health + points
