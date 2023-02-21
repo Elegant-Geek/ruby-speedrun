@@ -32,7 +32,7 @@ module StudioGame
             #treasure stuff
             treasures = TreasureTrove::TREASURES
             treasures.each do |t|
-                puts "A #{t.name} is worth #{t.points}"
+                puts "A #{t.name} is worth #{t.points} points."
             end
 
         end

@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 # --------------------------------display options for name and health: -------------------------------------
 # puts "\n#{name1}'s initial health is #{health1}."
 # puts "#{name2.upcase} has a health of #{health2}."
@@ -5,8 +6,10 @@
 # puts "#{name4.ljust(30, '.')} #{health4} health"
 # puts "Players:\n#{name1}\n#{name2}\n#{name3}\n#{name4}"
 
-require_relative 'player'
-require_relative 'game'
+# require_relative 'player'
+# require_relative 'game'
+require_relative '../lib/studio_game/player'
+require_relative '../lib/studio_game/game'
 
 # creating new players
 # player1 = Player.new("larry", 60)
@@ -17,7 +20,8 @@ require_relative 'game'
 # create new game 
 knuckleheads = StudioGame::Game.new("Knuckleheads")
 # takes cmd line argument given or if none given use a default file
-knuckleheads.load_players(ARGV.shift || "players.csv")
+default_player_file = File.join(File.dirname(__FILE__), 'players.csv')
+knuckleheads.load_players(ARGV.shift || default_player_file)
 # add spme players to game
 
 loop do
@@ -31,7 +35,7 @@ loop do
         knuckleheads.print_stats
         break
     else
-        'Please enter a number or type quit'
+        puts 'Please enter a number or type quit'
     end
 end
 knuckleheads.save_high_scores
