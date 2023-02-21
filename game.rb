@@ -35,6 +35,24 @@ class Game
         end
 
     end
+    def load_players(from_file)
+        File.readlines(from_file).each do |line|
+            add_player(Player.from_csv(line))            
+        end
+      end
+      def high_score_entry(player)
+        formatted_name = player.name.ljust(20, '.')
+        "#{formatted_name} #{player.score}"
+      end
+      def save_high_scores(to_file="high_scores.txt")
+        File.open(to_file, "w") do |file|
+          file.puts "#{@title} High Scores:"
+          sorted_players = @players.sort_by {|p| p.score}.reverse
+          sorted_players.each do |player|
+            file.puts high_score_entry(player)
+          end
+        end
+      end
     def print_stats
         puts "\n#{@title} Statistics:"
         strong_players, wimpy_players = @players.partition {|p| p.strong?}
@@ -50,8 +68,7 @@ class Game
         sorted_players = @players.sort_by {|p| p.score}.reverse
         puts "\n#{@title} High Scores:"
         sorted_players.each do |p|
-        formatted_name = p.name.ljust(20, '.')
-        puts "#{formatted_name} #{p.score}"
+            puts high_score_entry(p)
         end
         # TIP: you can replace @players below with the sorted players if you want but it doesn't matter too much
         @players.each do |p|

@@ -11,6 +11,13 @@ class Player
             @found_treasures = Hash.new(0)
         end
 
+        def self.from_csv(string)
+            # assign name to left csv column and health to right csv column
+            name, health = string.split(',')
+            # safely convert the health value from a string to an integer.
+            player = Player.new(name, Integer(health))
+          end
+
         def strong?
             @health > 100
         end

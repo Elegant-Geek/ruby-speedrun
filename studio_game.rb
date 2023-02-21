@@ -9,18 +9,31 @@ require_relative 'player'
 require_relative 'game'
 
 # creating new players
-player1 = Player.new("larry", 60)
-player2 = Player.new("curly", 125)
-# moe takes default health value
-player3 = Player.new("moe")
-player4 = Player.new("shemp", 90)
+# player1 = Player.new("larry", 60)
+# player2 = Player.new("curly", 125)
+# # moe takes default health value
+# player3 = Player.new("moe")
+# player4 = Player.new("shemp", 90)
 # create new game 
 knuckleheads = Game.new("Knuckleheads")
+# takes cmd line argument given or if none given use a default file
+knuckleheads.load_players(ARGV.shift || "players.csv")
 # add spme players to game
-knuckleheads.add_player(player1)
-knuckleheads.add_player(player2)
-knuckleheads.add_player(player3)
-knuckleheads.add_player(player4)
-# run the game
-knuckleheads.play(3)
-knuckleheads.print_stats
+
+loop do
+    puts "\nHow many game rounds? ('quit' to exit)"
+    answer = gets.chomp.downcase
+    case answer
+    when /^\d+$/
+        # run the game, converts input to integer (always +)
+        knuckleheads.play(answer.to_i)
+    when 'quit', 'exit', 'q'
+        knuckleheads.print_stats
+        break
+    else
+        'Please enter a number or type quit'
+    end
+end
+knuckleheads.save_high_scores
+
+
