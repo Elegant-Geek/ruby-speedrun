@@ -15,7 +15,7 @@ require_relative 'game'
 # player3 = Player.new("moe")
 # player4 = Player.new("shemp", 90)
 # create new game 
-knuckleheads = Game.new("Knuckleheads")
+knuckleheads = StudioGame::Game.new("Knuckleheads")
 # takes cmd line argument given or if none given use a default file
 knuckleheads.load_players(ARGV.shift || "players.csv")
 # add spme players to game
